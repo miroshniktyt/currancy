@@ -7,14 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4FC9C6A52CFDCD8300F7A498 /* FixerAPISuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6A42CFDCD8300F7A498 /* FixerAPISuccessResponse.swift */; };
+		4FC9C6A72CFDCDA800F7A498 /* FixerAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6A62CFDCDA800F7A498 /* FixerAPIErrorResponse.swift */; };
+		4FC9C6A92CFDCDB300F7A498 /* FixerAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6A82CFDCDB300F7A498 /* FixerAPIResponse.swift */; };
+		4FC9C6AB2CFDCE5600F7A498 /* FixerAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6AA2CFDCE5600F7A498 /* FixerAPIError.swift */; };
+		4FC9C6BC2CFDDF2800F7A498 /* ExchangeRatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6BA2CFDDF2800F7A498 /* ExchangeRatesViewModel.swift */; };
+		4FC9C6C02CFDDF5F00F7A498 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6BF2CFDDF5F00F7A498 /* ErrorView.swift */; };
+		4FC9C6C22CFDE01100F7A498 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6C12CFDE01100F7A498 /* LoadingView.swift */; };
 		4FECF16C2CFC75DC004B43DE /* currencyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FECF16B2CFC75DC004B43DE /* currencyApp.swift */; };
 		4FECF1702CFC75DF004B43DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FECF16F2CFC75DF004B43DE /* Assets.xcassets */; };
+		4FECF1972CFCE371004B43DE /* ExchangeRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FECF1962CFCE371004B43DE /* ExchangeRateService.swift */; };
+		4FECF19C2CFCED81004B43DE /* RatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FECF19B2CFCED81004B43DE /* RatesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4FC9C6A42CFDCD8300F7A498 /* FixerAPISuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerAPISuccessResponse.swift; sourceTree = "<group>"; };
+		4FC9C6A62CFDCDA800F7A498 /* FixerAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerAPIErrorResponse.swift; sourceTree = "<group>"; };
+		4FC9C6A82CFDCDB300F7A498 /* FixerAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerAPIResponse.swift; sourceTree = "<group>"; };
+		4FC9C6AA2CFDCE5600F7A498 /* FixerAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerAPIError.swift; sourceTree = "<group>"; };
+		4FC9C6BA2CFDDF2800F7A498 /* ExchangeRatesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRatesViewModel.swift; sourceTree = "<group>"; };
+		4FC9C6BF2CFDDF5F00F7A498 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		4FC9C6C12CFDE01100F7A498 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4FECF1682CFC75DC004B43DE /* currency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = currency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FECF16B2CFC75DC004B43DE /* currencyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currencyApp.swift; sourceTree = "<group>"; };
 		4FECF16F2CFC75DF004B43DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4FECF1962CFCE371004B43DE /* ExchangeRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateService.swift; sourceTree = "<group>"; };
+		4FECF19A2CFCE4FF004B43DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4FECF19B2CFCED81004B43DE /* RatesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4FC9C6BB2CFDDF2800F7A498 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4FC9C6BA2CFDDF2800F7A498 /* ExchangeRatesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		4FECF15F2CFC75DC004B43DE = {
 			isa = PBXGroup;
 			children = (
@@ -47,10 +74,11 @@
 		4FECF16A2CFC75DC004B43DE /* currency */ = {
 			isa = PBXGroup;
 			children = (
+				4FECF19A2CFCE4FF004B43DE /* Info.plist */,
 				4FECF16B2CFC75DC004B43DE /* currencyApp.swift */,
+				4FC9C6BB2CFDDF2800F7A498 /* ViewModel */,
 				4FECF1952CFCE350004B43DE /* Service */,
 				4FECF17B2CFC77B1004B43DE /* Models */,
-				4FECF17D2CFC77B1004B43DE /* ViewModels */,
 				4FECF1822CFC77B1004B43DE /* Views */,
 				4FECF16F2CFC75DF004B43DE /* Assets.xcassets */,
 			);
@@ -60,20 +88,19 @@
 		4FECF17B2CFC77B1004B43DE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4FC9C6A42CFDCD8300F7A498 /* FixerAPISuccessResponse.swift */,
+				4FC9C6A62CFDCDA800F7A498 /* FixerAPIErrorResponse.swift */,
+				4FC9C6A82CFDCDB300F7A498 /* FixerAPIResponse.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		4FECF17D2CFC77B1004B43DE /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		4FECF1822CFC77B1004B43DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FECF19B2CFCED81004B43DE /* RatesView.swift */,
+				4FC9C6C12CFDE01100F7A498 /* LoadingView.swift */,
+				4FC9C6BF2CFDDF5F00F7A498 /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -81,6 +108,8 @@
 		4FECF1952CFCE350004B43DE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				4FECF1962CFCE371004B43DE /* ExchangeRateService.swift */,
+				4FC9C6AA2CFDCE5600F7A498 /* FixerAPIError.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -154,7 +183,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FC9C6AB2CFDCE5600F7A498 /* FixerAPIError.swift in Sources */,
+				4FECF1972CFCE371004B43DE /* ExchangeRateService.swift in Sources */,
+				4FC9C6A72CFDCDA800F7A498 /* FixerAPIErrorResponse.swift in Sources */,
+				4FC9C6C22CFDE01100F7A498 /* LoadingView.swift in Sources */,
+				4FC9C6A52CFDCD8300F7A498 /* FixerAPISuccessResponse.swift in Sources */,
+				4FC9C6A92CFDCDB300F7A498 /* FixerAPIResponse.swift in Sources */,
+				4FC9C6C02CFDDF5F00F7A498 /* ErrorView.swift in Sources */,
+				4FC9C6BC2CFDDF2800F7A498 /* ExchangeRatesViewModel.swift in Sources */,
 				4FECF16C2CFC75DC004B43DE /* currencyApp.swift in Sources */,
+				4FECF19C2CFCED81004B43DE /* RatesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +327,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = currency/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -317,6 +356,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = currency/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

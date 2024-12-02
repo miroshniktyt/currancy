@@ -2,7 +2,7 @@
 //  currencyApp.swift
 //  currency
 //
-//  Created by pc on 01.12.24.
+//  Created by pc on 02.12.24.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct currencyApp: App {
     var body: some Scene {
         WindowGroup {
-            Text("Hi :)")
+            RatesView()
         }
     }
 }
