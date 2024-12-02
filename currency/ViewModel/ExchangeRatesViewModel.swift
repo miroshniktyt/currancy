@@ -9,12 +9,20 @@ import Foundation
 import Combine
 
 class ExchangeRatesViewModel: ObservableObject {
+    
     enum ViewState {
         case loading
         case loaded(base: String, rates: [String: Double])
         case error(String)
     }
     
+    struct RateWithFavoriteStatus {
+        let currency: String
+        let rate: Double
+        let isFavorite: Bool
+    }
+    
+    @Published private(set) var ratesWithStatus: [RateWithFavoriteStatus] = []
     @Published private(set) var state: ViewState = .loading
     @Published var selectedBaseCurrency: String = "EUR" {
         didSet {
@@ -24,6 +32,12 @@ class ExchangeRatesViewModel: ObservableObject {
     
     private var rates: [String: Double] = [:]
     private var cancellables = Set<AnyCancellable>()
+    private let favoritesStorage: FavoritesStorage
+    
+    init(favoritesStorage: FavoritesStorage = FavoritesStorageManager(userDefaults: .standard)) {
+        self.favoritesStorage = favoritesStorage
+        setupBindings()
+    }
     
     var availableCurrencies: [String] {
         if case .loaded(_, let rates) = state {
@@ -59,5 +73,38 @@ class ExchangeRatesViewModel: ObservableObject {
         }
         
         state = .loaded(base: selectedBaseCurrency, rates: recalculatedRates)
+    }
+    
+    private func setupBindings() {
+        Publishers.CombineLatest3(
+            $state,
+            $selectedBaseCurrency,
+            favoritesStorage.favorites
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] state, baseCurrency, favorites in
+            self?.updateRatesWithStatus(state: state, baseCurrency: baseCurrency, favorites: favorites)
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func updateRatesWithStatus(state: ViewState, baseCurrency: String, favorites: Set<FavoriteCurrencyPair>) {
+        guard case .loaded(_, let rates) = state else {
+            ratesWithStatus = []
+            return
+        }
+        
+        ratesWithStatus = rates.map { currency, rate in
+            RateWithFavoriteStatus(
+                currency: currency,
+                rate: rate,
+                isFavorite: favoritesStorage.isFavorite(base: baseCurrency, target: currency)
+            )
+        }
+        .sorted { $0.currency < $1.currency }
+    }
+    
+    func toggleFavorite(for currency: String) {
+        favoritesStorage.toggleFavorite(base: selectedBaseCurrency, target: currency)
     }
 } 

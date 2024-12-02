@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4FAB0FD52CFE602A000D23D6 /* FavoritesStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB0FD42CFE602A000D23D6 /* FavoritesStorageManager.swift */; };
+		4FAB0FD72CFE60AE000D23D6 /* FavoriteCurrencyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB0FD62CFE60AE000D23D6 /* FavoriteCurrencyPair.swift */; };
 		4FC9C6A52CFDCD8300F7A498 /* FixerAPISuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6A42CFDCD8300F7A498 /* FixerAPISuccessResponse.swift */; };
 		4FC9C6A72CFDCDA800F7A498 /* FixerAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6A62CFDCDA800F7A498 /* FixerAPIErrorResponse.swift */; };
 		4FC9C6A92CFDCDB300F7A498 /* FixerAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC9C6A82CFDCDB300F7A498 /* FixerAPIResponse.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4FAB0FD42CFE602A000D23D6 /* FavoritesStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStorageManager.swift; sourceTree = "<group>"; };
+		4FAB0FD62CFE60AE000D23D6 /* FavoriteCurrencyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCurrencyPair.swift; sourceTree = "<group>"; };
 		4FC9C6A42CFDCD8300F7A498 /* FixerAPISuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerAPISuccessResponse.swift; sourceTree = "<group>"; };
 		4FC9C6A62CFDCDA800F7A498 /* FixerAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerAPIErrorResponse.swift; sourceTree = "<group>"; };
 		4FC9C6A82CFDCDB300F7A498 /* FixerAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerAPIResponse.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC9C6A42CFDCD8300F7A498 /* FixerAPISuccessResponse.swift */,
+				4FAB0FD62CFE60AE000D23D6 /* FavoriteCurrencyPair.swift */,
 				4FC9C6A62CFDCDA800F7A498 /* FixerAPIErrorResponse.swift */,
 				4FC9C6A82CFDCDB300F7A498 /* FixerAPIResponse.swift */,
 			);
@@ -108,6 +113,7 @@
 		4FECF1952CFCE350004B43DE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				4FAB0FD42CFE602A000D23D6 /* FavoritesStorageManager.swift */,
 				4FECF1962CFCE371004B43DE /* ExchangeRateService.swift */,
 				4FC9C6AA2CFDCE5600F7A498 /* FixerAPIError.swift */,
 			);
@@ -183,10 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FAB0FD72CFE60AE000D23D6 /* FavoriteCurrencyPair.swift in Sources */,
 				4FC9C6AB2CFDCE5600F7A498 /* FixerAPIError.swift in Sources */,
 				4FECF1972CFCE371004B43DE /* ExchangeRateService.swift in Sources */,
 				4FC9C6A72CFDCDA800F7A498 /* FixerAPIErrorResponse.swift in Sources */,
 				4FC9C6C22CFDE01100F7A498 /* LoadingView.swift in Sources */,
+				4FAB0FD52CFE602A000D23D6 /* FavoritesStorageManager.swift in Sources */,
 				4FC9C6A52CFDCD8300F7A498 /* FixerAPISuccessResponse.swift in Sources */,
 				4FC9C6A92CFDCDB300F7A498 /* FixerAPIResponse.swift in Sources */,
 				4FC9C6C02CFDDF5F00F7A498 /* ErrorView.swift in Sources */,

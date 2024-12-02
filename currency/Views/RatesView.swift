@@ -34,7 +34,10 @@ struct RatesView: View {
                         Divider()
                             .padding(.top)
                         
-                        RatesList(rates: rates)
+                        RatesList(
+                            rates: viewModel.ratesWithStatus,
+                            onFavoriteToggle: viewModel.toggleFavorite
+                        )
                     }
                 }
             }
@@ -71,24 +74,29 @@ private struct BaseCurrencyPicker: View {
 }
 
 private struct RatesList: View {
-    let rates: [String: Double]
+    let rates: [ExchangeRatesViewModel.RateWithFavoriteStatus]
+    let onFavoriteToggle: (String) -> Void
     
     var body: some View {
         List {
-            ForEach(Array(rates.keys.sorted()), id: \.self) { currency in
-                if let rate = rates[currency] {
-                    RateRow(currency: currency, rate: rate)
-                }
+            ForEach(rates, id: \.currency) { rateInfo in
+                RateRow(
+                    currency: rateInfo.currency,
+                    rate: rateInfo.rate,
+                    isFavorite: rateInfo.isFavorite,
+                    onFavoriteToggle: { onFavoriteToggle(rateInfo.currency) }
+                )
             }
         }
         .listStyle(.plain)
-        .listRowInsets(EdgeInsets())
     }
 }
 
 private struct RateRow: View {
     let currency: String
     let rate: Double
+    let isFavorite: Bool
+    let onFavoriteToggle: () -> Void
     
     var body: some View {
         HStack(spacing: 12) {
@@ -100,7 +108,12 @@ private struct RateRow: View {
                 .font(.body)
                 .monospacedDigit()
                 .foregroundStyle(.secondary)
+            Button(action: onFavoriteToggle) {
+                Image(systemName: isFavorite ? "star.fill" : "star")
+                    .foregroundStyle(isFavorite ? .yellow : .gray)
+            }
         }
+        .padding(.horizontal)
     }
 }
 
