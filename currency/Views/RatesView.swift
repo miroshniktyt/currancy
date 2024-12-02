@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RatesView: View {
-    @StateObject private var viewModel = ExchangeRatesViewModel()
+    @StateObject var viewModel: ExchangeRatesViewModel
     
     var body: some View {
         NavigationView {
@@ -115,9 +115,4 @@ private struct RateRow: View {
         }
         .padding(.horizontal)
     }
-}
-
-
-#Preview {
-    RatesView()
 }

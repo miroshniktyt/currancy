@@ -14,7 +14,7 @@ protocol FavoritesStorage {
     func isFavorite(base: String, target: String) -> Bool
 }
 
-class FavoritesStorageManager: FavoritesStorage {
+class FavoritesStorageManager: ObservableObject, FavoritesStorage {
     private let userDefaults: UserDefaults
     private let favoritesKey = "favoriteCurrencyPairs"
     private let favoritesSubject = CurrentValueSubject<Set<FavoriteCurrencyPair>, Never>([])
