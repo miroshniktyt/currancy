@@ -36,8 +36,8 @@ class ExchangeRatesViewModel: ObservableObject {
     private let favoritesStorage: FavoritesStorage
     
     init(
-        ratesStore: ExchangeRatesStore = ExchangeRatesStore(),
-        favoritesStorage: FavoritesStorage = FavoritesStorageManager(userDefaults: .standard)
+        ratesStore: ExchangeRatesStore,
+        favoritesStorage: FavoritesStorage
     ) {
         self.ratesStore = ratesStore
         self.favoritesStorage = favoritesStorage

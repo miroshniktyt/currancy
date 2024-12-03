@@ -9,22 +9,61 @@ import Foundation
 import Combine
 
 class FavoriteRatesViewModel: ObservableObject {
-    @Published private(set) var favoritePairs: [FavoriteCurrencyPair] = []
+    struct FavoriteRateWithValue {
+        let pair: FavoriteCurrencyPair
+        let rate: Double?
+    }
+    
+    @Published private(set) var favoriteRates: [FavoriteRateWithValue] = []
     private let favoritesStorage: FavoritesStorage
+    private let ratesStore: ExchangeRatesStore
     private var cancellables = Set<AnyCancellable>()
     
-    init(favoritesStorage: FavoritesStorage) {
+    init(
+        ratesStore: ExchangeRatesStore,
+        favoritesStorage: FavoritesStorage
+    ) {
+        self.ratesStore = ratesStore
         self.favoritesStorage = favoritesStorage
         setupBindings()
     }
     
     private func setupBindings() {
-        favoritesStorage.favorites
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] favorites in
-                self?.favoritePairs = Array(favorites).sorted { $0.baseCurrency < $1.baseCurrency }
+        Publishers.CombineLatest(
+            favoritesStorage.favorites,
+            ratesStore.$state
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] favorites, ratesState in
+            self?.updateFavoriteRates(favorites: favorites, ratesState: ratesState)
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func updateFavoriteRates(
+        favorites: Set<FavoriteCurrencyPair>,
+        ratesState: ExchangeRatesStore.LoadingState
+    ) {
+        let rates: [String: Double]
+        if case .loaded(let response) = ratesState {
+            rates = response.rates
+        } else {
+            rates = [:]
+        }
+        
+        favoriteRates = Array(favorites)
+            .map { pair in
+                let rate = rates[pair.targetCurrency].map { targetRate in
+                    let baseRate = rates[pair.baseCurrency] ?? 1
+                    return targetRate / baseRate
+                }
+                return FavoriteRateWithValue(pair: pair, rate: rate)
             }
-            .store(in: &cancellables)
+            .sorted { $0.pair.baseCurrency < $1.pair.baseCurrency }
+    }
+    
+    func fetchRates() {
+        ratesStore.fetchRates()
     }
     
     func removeFavorite(_ pair: FavoriteCurrencyPair) {

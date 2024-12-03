@@ -14,21 +14,24 @@ struct FavoriteRatesView: View {
     var body: some View {
         NavigationView {
             Group {
-                if viewModel.favoritePairs.isEmpty {
+                if viewModel.favoriteRates.isEmpty {
                     VStack {
                         Text("No Favorites Yet")
                         Text("Your favorite currency pairs will appear here when you add some in Rates tab :)")
                     }
                 } else {
                     List {
-                        ForEach(viewModel.favoritePairs, id: \.id) { pair in
-                            FavoritePairRow(pair: pair)
+                        ForEach(viewModel.favoriteRates, id: \.pair.id) { favoriteRate in
+                            FavoritePairRow(pair: favoriteRate)
                         }
                         .onDelete { indexSet in
                             indexSet.forEach { index in
-                                viewModel.removeFavorite(viewModel.favoritePairs[index])
+                                viewModel.removeFavorite(viewModel.favoriteRates[index].pair)
                             }
                         }
+                    }
+                    .refreshable {
+                        viewModel.fetchRates()
                     }
                 }
             }
@@ -38,17 +41,23 @@ struct FavoriteRatesView: View {
 }
 
 private struct FavoritePairRow: View {
-    let pair: FavoriteCurrencyPair
+    let pair: FavoriteRatesViewModel.FavoriteRateWithValue
     
     var body: some View {
         HStack {
-            Text(pair.baseCurrency)
+            Text(pair.pair.baseCurrency)
                 .font(.headline)
             Image(systemName: "arrow.right")
                 .foregroundStyle(.secondary)
-            Text(pair.targetCurrency)
+            Text(pair.pair.targetCurrency)
                 .font(.headline)
             Spacer()
+            if let rate = pair.rate {
+                Text(String(format: "%.4f", rate))
+                    .font(.body)
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(.vertical, 4)
     }
