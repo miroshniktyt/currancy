@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct MainTabView: View {
-    @EnvironmentObject private var favoritesStorage: FavoritesStorageManager
-    private let ratesStore = ExchangeRatesStore()
+    @EnvironmentObject private var favoritesStorage: FavoritesStorage
+    private let ratesStore = RatesRepository()
     
     var body: some View {
         TabView {
@@ -24,7 +24,7 @@ struct MainTabView: View {
                 Label("Favorites", systemImage: "star.fill")
             }
             
-            RatesView(
+            ExchangeRatesView(
                 viewModel: ExchangeRatesViewModel(
                     ratesStore: ratesStore,
                     favoritesStorage: favoritesStorage

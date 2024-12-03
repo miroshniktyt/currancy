@@ -30,13 +30,13 @@ class ExchangeRatesViewModel: ObservableObject {
         }
     }
     
-    private let ratesStore: ExchangeRatesStore
+    private let ratesStore: RatesRepository
     private var rates: [String: Double] = [:]
     private var cancellables = Set<AnyCancellable>()
     private let favoritesStorage: FavoritesStorage
     
     init(
-        ratesStore: ExchangeRatesStore,
+        ratesStore: RatesRepository,
         favoritesStorage: FavoritesStorage
     ) {
         self.ratesStore = ratesStore

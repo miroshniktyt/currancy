@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RatesView: View {
+struct ExchangeRatesView: View {
     @StateObject var viewModel: ExchangeRatesViewModel
     
     var body: some View {
@@ -49,30 +49,6 @@ struct RatesView: View {
     }
 }
 
-// MARK: - Subviews
-private struct BaseCurrencyPicker: View {
-    @Binding var selectedCurrency: String
-    let availableCurrencies: [String]
-    
-    var body: some View {
-        HStack {
-            Text("Base Currency:")
-                .font(.headline)
-            Spacer()
-            Picker("Base Currency", selection: $selectedCurrency) {
-                ForEach(availableCurrencies, id: \.self) { currency in
-                    Text(currency)
-                        .tag(currency)
-                }
-            }
-            .pickerStyle(.menu)
-        }
-        .padding()
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(16)
-    }
-}
-
 private struct RatesList: View {
     let rates: [ExchangeRatesViewModel.RateWithFavoriteStatus]
     let onFavoriteToggle: (String) -> Void
@@ -91,33 +67,3 @@ private struct RatesList: View {
         .listStyle(.plain)
     }
 }
-
-private struct RateRow: View {
-    let currency: String
-    let rate: Double
-    let isFavorite: Bool
-    let onFavoriteToggle: () -> Void
-    
-    var body: some View {
-        HStack(spacing: 12) {
-            Text(currency)
-                .font(.headline)
-                .foregroundStyle(.primary)
-            Spacer()
-            Text(String(format: "%.4f", rate))
-                .font(.body)
-                .monospacedDigit()
-                .foregroundStyle(.secondary)
-            Button(action: onFavoriteToggle) {
-                Image(systemName: isFavorite ? "star.fill" : "star")
-                    .foregroundStyle(isFavorite ? .yellow : .gray)
-            }
-        }
-        .padding(.horizontal)
-    }
-}
-
-
-//#Preview {
-//    RatesView()
-//}

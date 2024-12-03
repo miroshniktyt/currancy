@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-enum ExchangeRateService {
+enum ExchangeRatesAPI {
     private static let baseURL = "http://data.fixer.io/api/latest"
-    private static let accessKey = "283a859b09c9e36943c08f8456f82a33"
+    private static let accessKey = "your_key"
     
     static func fetchLatestRates() -> AnyPublisher<FixerAPISuccessResponse, FixerAPIError> {
         guard let url = makeURL() else {

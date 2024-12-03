@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct currencyApp: App {
-    private let favoritesStorage = FavoritesStorageManager()
+    private let favoritesStorage = DefaultsFavoritesStorage()
     
     var body: some Scene {
         WindowGroup {

@@ -16,11 +16,11 @@ class FavoriteRatesViewModel: ObservableObject {
     
     @Published private(set) var favoriteRates: [FavoriteRateWithValue] = []
     private let favoritesStorage: FavoritesStorage
-    private let ratesStore: ExchangeRatesStore
+    private let ratesStore: RatesRepository
     private var cancellables = Set<AnyCancellable>()
     
     init(
-        ratesStore: ExchangeRatesStore,
+        ratesStore: RatesRepository,
         favoritesStorage: FavoritesStorage
     ) {
         self.ratesStore = ratesStore
@@ -42,7 +42,7 @@ class FavoriteRatesViewModel: ObservableObject {
     
     private func updateFavoriteRates(
         favorites: Set<FavoriteCurrencyPair>,
-        ratesState: ExchangeRatesStore.LoadingState
+        ratesState: RatesRepository.LoadingState
     ) {
         let rates: [String: Double]
         if case .loaded(let response) = ratesState {

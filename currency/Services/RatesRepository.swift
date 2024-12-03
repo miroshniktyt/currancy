@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ExchangeRatesStore: ObservableObject {
+class RatesRepository: ObservableObject {
     enum LoadingState {
         case loading
         case loaded(FixerAPISuccessResponse)
@@ -24,7 +24,7 @@ class ExchangeRatesStore: ObservableObject {
     func fetchRates() {
         state = .loading
         
-        ExchangeRateService.fetchLatestRates()
+        ExchangeRatesAPI.fetchLatestRates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {
