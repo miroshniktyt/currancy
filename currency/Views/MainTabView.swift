@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @EnvironmentObject private var favoritesStorage: FavoritesStorageManager
-    
+
     var body: some View {
         TabView {
             FavoriteRatesView(

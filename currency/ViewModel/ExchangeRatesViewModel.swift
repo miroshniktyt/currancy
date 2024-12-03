@@ -30,11 +30,16 @@ class ExchangeRatesViewModel: ObservableObject {
         }
     }
     
+    private let ratesStore: ExchangeRatesStore
     private var rates: [String: Double] = [:]
     private var cancellables = Set<AnyCancellable>()
     private let favoritesStorage: FavoritesStorage
     
-    init(favoritesStorage: FavoritesStorage = FavoritesStorageManager(userDefaults: .standard)) {
+    init(
+        ratesStore: ExchangeRatesStore = ExchangeRatesStore(),
+        favoritesStorage: FavoritesStorage = FavoritesStorageManager(userDefaults: .standard)
+    ) {
+        self.ratesStore = ratesStore
         self.favoritesStorage = favoritesStorage
         setupBindings()
     }
@@ -47,20 +52,7 @@ class ExchangeRatesViewModel: ObservableObject {
     }
     
     func fetchRates() {
-        state = .loading
-        
-        ExchangeRateService.fetchLatestRates()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                if case .failure(let error) = completion {
-                    self?.state = .error(error.localizedDescription)
-                }
-            } receiveValue: { [weak self] response in
-                self?.rates = response.rates
-                self?.selectedBaseCurrency = response.base
-                self?.recalculateRates()
-            }
-            .store(in: &cancellables)
+        ratesStore.fetchRates()
     }
     
     private func recalculateRates() {
@@ -76,6 +68,22 @@ class ExchangeRatesViewModel: ObservableObject {
     }
     
     private func setupBindings() {
+        ratesStore.$state
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                switch state {
+                case .loading:
+                    self?.state = .loading
+                case .loaded(let response):
+                    self?.rates = response.rates
+                    self?.selectedBaseCurrency = response.base
+                    self?.recalculateRates()
+                case .error(let error):
+                    self?.state = .error(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellables)
+        
         Publishers.CombineLatest3(
             $state,
             $selectedBaseCurrency,

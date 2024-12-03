@@ -38,13 +38,13 @@ struct RatesView: View {
                             rates: viewModel.ratesWithStatus,
                             onFavoriteToggle: viewModel.toggleFavorite
                         )
+                        .refreshable {
+                            viewModel.fetchRates()
+                        }
                     }
                 }
             }
             .navigationTitle("Exchange Rates")
-        }
-        .onAppear {
-            viewModel.fetchRates()
         }
     }
 }
@@ -116,3 +116,8 @@ private struct RateRow: View {
         .padding(.horizontal)
     }
 }
+
+
+//#Preview {
+//    RatesView()
+//}
